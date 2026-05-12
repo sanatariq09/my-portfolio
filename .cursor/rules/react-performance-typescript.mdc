@@ -1,0 +1,39 @@
+---
+description: React performance optimisations and TypeScript conventions for React
+globs: **/*.tsx
+alwaysApply: true
+---
+
+# Performance
+
+- Wrap expensive child components with `React.memo` only when profiling confirms unnecessary re-renders.
+- Use `useCallback` for functions passed as props to memoized children; use `useMemo` for expensive computations.
+- Avoid creating objects/arrays inline in JSX — define them outside the component or memoize them.
+
+```tsx
+// ❌ BAD — new reference on every render
+<List style={{ padding: 8 }} items={data.filter(Boolean)} />
+
+// ✅ GOOD
+const listStyle = { padding: 8 };
+const visibleItems = useMemo(() => data.filter(Boolean), [data]);
+<List style={listStyle} items={visibleItems} />
+```
+
+- Lazy-load routes and heavy components with `React.lazy` + `Suspense`.
+- Virtualise long lists (100+ items) with a library such as `@tanstack/react-virtual`.
+
+# TypeScript
+
+- Always type component props with an `interface` (prefer over `type` for extendability).
+- Never use `any` — use `unknown` and narrow, or the correct specific type.
+- Use `React.FC` sparingly; prefer explicit return types only when the inference is ambiguous.
+- Type event handlers explicitly: `React.ChangeEvent<HTMLInputElement>`, `React.FormEvent<HTMLFormElement>`, etc.
+
+```tsx
+// ❌ BAD
+const handleChange = (e: any) => setVal(e.target.value);
+
+// ✅ GOOD
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setVal(e.target.value);
+```

@@ -1,0 +1,474 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 8rem 2.5rem 5rem;
+}
+
+/* ── Two-column inner layout ─────────────────────────── */
+.heroInner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 5rem;
+  width: 100%;
+  max-width: 1100px;
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* ── Background ──────────────────────────────────────── */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orb1,
+.orb2,
+.orb3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  animation: float 8s ease-in-out infinite;
+}
+
+.orb1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #ff6b35, transparent);
+  top: -150px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.orb2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #06d6a0, transparent);
+  bottom: -100px;
+  right: -80px;
+  animation-delay: -3s;
+}
+
+.orb3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #ff9f1c, transparent);
+  top: 40%;
+  left: 60%;
+  animation-delay: -5s;
+}
+
+.gridBg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* .particle styles & animation are handled entirely via
+   the Web Animations API in Hero.tsx — no CSS rule needed */
+
+/* ── Real-time greeting ──────────────────────────────── */
+.greetLine {
+  font-size: 12px;
+  color: var(--text3);
+  letter-spacing: 0.3px;
+  margin-bottom: 1rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.greetLine strong {
+  color: var(--accent3);
+  font-weight: 700;
+}
+
+/* ── Content ─────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.badgeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent3);
+}
+
+.title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -3px;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.line1 {
+  display: block;
+  color: var(--text);
+}
+
+.line2 {
+  display: block;
+  background: linear-gradient(135deg, #ff6b35, #ff9f1c, #06d6a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gshift 4s ease infinite;
+}
+
+.line3 {
+  display: block;
+  color: var(--text);
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 0.7em;
+  letter-spacing: -2px;
+}
+
+/* ── Typewriter line ─────────────────────────────────── */
+.tagline {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text2);
+  margin: 1rem 0 0;
+  animation: fadeUp 0.8s 0.25s ease both;
+  letter-spacing: -0.3px;
+}
+
+.typeword {
+  color: var(--accent);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  min-width: 1ch;
+  display: inline-block;
+}
+
+.typeCursor {
+  color: var(--accent);
+  font-weight: 300;
+  animation: blink 0.9s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.sub {
+  max-width: 480px;
+  margin: 1.5rem 0 2.5rem;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text2);
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+/* ── Stats ───────────────────────────────────────────── */
+.stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 3rem;
+  animation: fadeUp 0.8s 0.6s ease both;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statNum {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.statNum span {
+  color: var(--accent);
+}
+
+.statLbl {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Scroll indicator ────────────────────────────────── */
+.scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text3);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 1;
+  animation: fadeUp 1s 0.8s ease both;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: spulse 2s ease-in-out infinite;
+}
+
+/* ── Photo ───────────────────────────────────────────── */
+.photoWrap {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+  animation: fadeUp 0.8s 0.2s ease both;
+  cursor: pointer;
+}
+
+/* rotating gradient ring */
+.photoRing {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--accent) 0deg,
+    var(--accent2) 90deg,
+    var(--accent3) 180deg,
+    transparent 270deg,
+    var(--accent) 360deg
+  );
+  animation: spinRing 6s linear infinite;
+  transition: inset 0.4s ease;
+}
+
+/* inner surface ring (gap between ring and photo) */
+.photoRing2 {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--bg);
+  transition: inset 0.4s ease;
+}
+
+/* ambient glow behind photo */
+.photoGlow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  animation: glowPulse 3s ease-in-out infinite;
+  transition: inset 0.4s ease, opacity 0.4s;
+}
+
+/* hover: expand ring + glow */
+.photoWrap:hover .photoRing  { inset: -10px; }
+.photoWrap:hover .photoRing2 { inset: -5px;  }
+.photoWrap:hover .photoGlow  { inset: -40px; opacity: 1.4; }
+
+/* photo itself */
+.photo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+              filter 0.5s ease,
+              box-shadow 0.5s ease;
+  filter: brightness(0.95) saturate(1);
+}
+
+.photoWrap:hover .photo {
+  transform: scale(1.06);
+  filter: brightness(1.08) saturate(1.15);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5),
+              inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+/* overlay tint that reveals on hover */
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 2;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 107, 53, 0.12) 0%,
+    rgba(6, 214, 160, 0.08) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.photoWrap:hover .photoOverlay { opacity: 1; }
+
+/* "Open to work" floating badge */
+.photoBadge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0.85;
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1),
+              opacity 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.photoWrap:hover .photoBadge {
+  transform: translateX(-50%) translateY(-4px);
+  opacity: 1;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.photoBadgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent3);
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1);    }
+  50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero {
+    /* extra bottom room so the absolute scroll indicator
+       never overlaps the stacked photo */
+    padding-bottom: 7rem;
+  }
+
+  .heroInner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  /* photo first, then text */
+  .photoWrap   { order: -1; width: 220px; height: 220px; }
+  .heroContent { align-items: center; }
+  .sub         { margin: 1.5rem auto 2.5rem; }
+  .cta         { justify-content: center; }
+  .stats       { justify-content: center; gap: 20px; }
+}
+
+@media (max-width: 640px) {
+  .hero      { padding: 6rem 1.5rem 6rem; }
+  .photoWrap { width: 180px; height: 180px; }
+
+  /* hide scroll indicator on small screens — it overlaps the photo */
+  .scroll { display: none; }
+}
+
+/* ── Keyframes (must live in the module file that uses them) ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0)     scale(1);    }
+  50%       { transform: translateY(-30px) scale(1.05); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes gshift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+@keyframes spulse {
+  0%, 100% { opacity: 1; height: 50px; }
+  50%       { opacity: 0.3; height: 30px; }
+}

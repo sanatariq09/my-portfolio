@@ -1,0 +1,279 @@
+/* ── Toggle button ───────────────────────────────────── */
+.tab {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 300;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 7px;
+
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  transition: left var(--transition), color 0.25s, border-color 0.25s, background 0.25s;
+}
+
+.tab:hover {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+
+/* slide tab right when panel opens */
+.tabOpen {
+  left: 300px;
+  color: var(--text3);
+  border-color: var(--border2);
+}
+
+.tabOpen:hover {
+  background: transparent;
+  color: var(--text2);
+  border-color: var(--border2);
+}
+
+.tabIcon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.tabLabel {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.tabArrow {
+  font-size: 11px;
+  transition: transform 0.3s;
+}
+
+/* ── Left Panel ──────────────────────────────────────── */
+.panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border2);
+  z-index: 299;
+  transform: translateX(-100%);
+  transition: transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelOpen {
+  transform: translateX(0);
+}
+
+/* ── Header ──────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 1.2rem 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  background: var(--surface);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.headerTitle {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.headerSub {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+}
+
+.closeBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  background: none;
+  color: var(--text2);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ── Skill list ──────────────────────────────────────── */
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+
+.list::-webkit-scrollbar       { width: 3px; }
+.list::-webkit-scrollbar-track { background: transparent; }
+.list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.item:has(.itemHeaderOpen) {
+  border-color: var(--border);
+  background: var(--surface2);
+}
+
+.itemHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+
+.itemHeader:hover {
+  background: var(--surface2);
+}
+
+.itemHeaderOpen {
+  background: transparent;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.icOrange { background: linear-gradient(135deg, #ff6b35, #ff9f1c); }
+.icGreen  { background: linear-gradient(135deg, #06d6a0, #028a57); }
+.icAmber  { background: linear-gradient(135deg, #ff9f1c, #e67e00); }
+.icPurple { background: linear-gradient(135deg, #a855f7, #6c21b5); }
+.icBlue   { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.icPink   { background: linear-gradient(135deg, #ec4899, #9d1759); }
+
+.itemName {
+  flex: 1;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.chevron {
+  color: var(--text3);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+.chevronOpen {
+  transform: rotate(90deg);
+  color: var(--accent);
+}
+
+/* ── Tags accordion ──────────────────────────────────── */
+.tagWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 0 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+              padding-bottom 0.35s;
+}
+
+.tagWrapOpen {
+  max-height: 520px;
+  padding-bottom: 10px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  padding: 3px 9px;
+  border-radius: 50px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tagIcon {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ── Backdrop ────────────────────────────────────────── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 298;
+}
+
+@media (max-width: 768px) {
+  .tab   { top: 45%; }
+  .panel { width: 280px; }
+  .tabOpen { left: 280px; }
+}

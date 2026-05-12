@@ -1,0 +1,36 @@
+.wrap {
+  padding: 1.8rem 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+
+.track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Clash Display', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.dot {
+  color: var(--accent);
+  font-size: 18px;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}

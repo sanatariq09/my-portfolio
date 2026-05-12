@@ -1,0 +1,29 @@
+---
+description: React component structure, naming conventions, and styling
+globs: **/*.tsx
+alwaysApply: true
+---
+
+# React Component Conventions
+
+## Structure & Naming
+
+- Use **functional components** exclusively — no class components.
+- Name components in **PascalCase**; files match the component name (e.g., `UserCard.tsx`).
+- One component per file; co-locate subcomponents only when they are not reused elsewhere.
+- Keep components focused: if JSX exceeds ~80 lines, extract into smaller components.
+
+```tsx
+// ❌ BAD
+export default function user_card({ name }: any) { ... }
+
+// ✅ GOOD
+interface UserCardProps { name: string; avatarUrl?: string }
+export function UserCard({ name, avatarUrl }: UserCardProps) { ... }
+```
+
+## Styling
+
+- Prefer **CSS Modules** (`Component.module.css`) or a utility-first library (e.g., Tailwind).
+- Avoid inline `style` objects except for dynamic values that cannot be expressed in CSS.
+- Never hardcode colors or spacing — use design tokens / CSS variables.

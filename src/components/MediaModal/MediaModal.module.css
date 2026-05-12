@@ -1,0 +1,206 @@
+/* MediaModal.module.css
+   ─────────────────────
+   Standalone modal styles – does NOT touch any existing class names.
+   Uses the same CSS variables defined in globals.css.
+*/
+
+/* ── Dark overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: mmFadeIn 0.25s ease;
+}
+
+@keyframes mmFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Panel ── */
+.panel {
+  background: var(--bg2, #0f1117);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow:
+    0 40px 120px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 107, 53, 0.08);
+  animation: mmSlideUp 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes mmSlideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+}
+
+.headerTitle {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text, #f0f0f8);
+  letter-spacing: -0.3px;
+}
+
+.closeBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text2, #9a9bb5);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 107, 53, 0.15);
+  color: var(--accent, #ff6b35);
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+/* ── Tab switcher ── */
+.tabs {
+  display: flex;
+  gap: 6px;
+  padding: 0.75rem 1.4rem 0;
+  flex-shrink: 0;
+}
+
+.tab {
+  padding: 6px 16px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: var(--text2, #9a9bb5);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.25s;
+  font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+.tab:hover {
+  border-color: rgba(255, 107, 53, 0.3);
+  color: var(--text, #f0f0f8);
+}
+
+.tabActive {
+  background: linear-gradient(135deg, var(--accent, #ff6b35), var(--accent2, #ff9f1c));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+}
+
+/* ── Media area ── */
+.mediaWrap {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  min-height: 0;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 0.75rem 1.4rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Image ── */
+.image {
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 8px;
+  object-fit: contain;
+  cursor: zoom-in;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: block;
+}
+
+.imageZoomed {
+  max-width: none;
+  max-height: none;
+  transform: scale(1.5);
+  cursor: zoom-out;
+}
+
+/* ── Video (native MP4) ── */
+.video {
+  width: 100%;
+  max-height: 60vh;
+  border-radius: 8px;
+  outline: none;
+  background: #000;
+}
+
+/* ── Video (iframe embed) ── */
+.iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 8px;
+}
+
+/* ── Hint text ── */
+.hint {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text3, #5c5e7a);
+  padding: 0 1.4rem 1rem;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .panel {
+    border-radius: 16px;
+    max-height: 95vh;
+  }
+
+  .mediaWrap {
+    margin: 0.5rem 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .image {
+    max-height: 50vh;
+  }
+
+  .video,
+  .iframe {
+    max-height: 50vh;
+  }
+
+  .imageZoomed {
+    transform: scale(1.3);
+  }
+}

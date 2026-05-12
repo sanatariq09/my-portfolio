@@ -1,0 +1,15 @@
+export const marqueeItems = [
+  'React',
+  'Node.js',
+  // 'TypeScript',
+  'Node.js',
+  // 'MySQL',
+  'MySQL',
+  // 'Docker',
+  // 'AWS',
+  // 'GraphQL',
+  'PHP',
+  'Laravel',
+  'Wordpress',
+  'Tailwind',
+];

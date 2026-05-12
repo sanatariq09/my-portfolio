@@ -1,0 +1,47 @@
+/* Hidden on touch / narrow layouts (matches Topbar tablet breakpoint) */
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+  .cursor,
+  .cursorRing {
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+  transition: width 0.16s ease, height 0.16s ease, opacity 0.2s ease;
+}
+
+.cursorRing {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent) 80%, white 20%);
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+}
+
+.cursor:global(.big) {
+  width: 14px;
+  height: 14px;
+}
+
+.cursorRing:global(.big) {
+  width: 48px;
+  height: 48px;
+  border-color: var(--accent2);
+  opacity: 0.72;
+}

@@ -1,0 +1,40 @@
+---
+description: React hooks usage, custom hooks, and state management patterns
+globs: **/*.tsx
+alwaysApply: true
+---
+
+# Hooks & State Management
+
+## Hook Rules
+
+- Call hooks only at the **top level** — never inside loops, conditions, or nested functions.
+- Extract reusable stateful logic into **custom hooks** prefixed with `use` (e.g., `useAuth`, `usePagination`).
+- Keep each custom hook focused on a single concern.
+
+```tsx
+// ❌ BAD — logic mixed into component
+function ProductList() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => { fetch('/api/products').then(...) }, []);
+  ...
+}
+
+// ✅ GOOD — extracted custom hook
+function useProducts() {
+  const [products, setProducts] = useState<Product[]>([]);
+  useEffect(() => { ... }, []);
+  return products;
+}
+function ProductList() {
+  const products = useProducts();
+  ...
+}
+```
+
+## State Management
+
+- Prefer **local state** (`useState`) unless state is shared across sibling/parent components.
+- Lift state to the **nearest common ancestor** before reaching for global state.
+- Use **Context + `useReducer`** for moderately complex shared state; prefer a dedicated library (Zustand, Jotai) for app-wide state.
+- Derive values from existing state instead of duplicating them in separate state variables.

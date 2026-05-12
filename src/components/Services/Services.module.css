@@ -1,0 +1,133 @@
+.section {
+  background: var(--bg2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 3.5rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* top accent line that slides in on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; right: -100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent3), transparent);
+  transition: left 0.4s ease, right 0.4s ease;
+}
+
+.card:hover::after {
+  left: 0; right: 0;
+}
+
+.card:hover {
+  border-color: rgba(6, 214, 160, 0.2);
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 70px rgba(6, 214, 160, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* ── Animated icon ── */
+.iconWrap {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 28px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: block;
+  animation: iconBob 3s ease-in-out infinite;
+}
+
+.card:hover .icon {
+  transform: scale(1.2) rotate(-8deg);
+  animation-play-state: paused;
+}
+
+.iconRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  transition: all 0.4s;
+  animation: ringPulse 3s ease-in-out infinite;
+}
+
+.card:hover .iconRing {
+  border-color: var(--accent3);
+  box-shadow: 0 0 20px var(--glow3);
+  transform: scale(1.15);
+}
+
+@keyframes iconBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1);    }
+  50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+.num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 48px;
+  color: var(--border2);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+
+.desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent3);
+}
+
+.price span {
+  font-size: 13px;
+  color: var(--text3);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 400;
+}

@@ -1,0 +1,214 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+
+.overlayOpen {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: var(--sidebar);
+  height: 100vh;
+  background: var(--surface);
+  border-left: 1px solid var(--border2);
+  z-index: 201;
+  transform: translateX(100%);
+  transition: transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2rem;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.closeBtn {
+  align-self: flex-end;
+  background: none;
+  border: 1.5px solid var(--border2);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.closeBtn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.logo {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.available {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent3);
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.25s, background 0.25s, border-color 0.25s;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+.navLink:hover {
+  color: var(--text);
+  background: var(--surface2);
+  border-color: var(--border);
+}
+
+/* ── Active state ── */
+.navLinkActive {
+  color: var(--text) !important;
+  background: var(--surface2);
+  border-color: var(--border) !important;
+}
+
+/* left accent bar */
+.activeBar {
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+  opacity: 0;
+  transform: scaleY(0);
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.navLinkActive .activeBar {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.navLabel {
+  flex: 1;
+}
+
+.navIcon {
+  font-size: 16px;
+  width: 22px;
+  text-align: center;
+  transition: color 0.25s;
+}
+
+.navIconActive {
+  color: var(--accent);
+}
+
+.navNum {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text3);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  transition: color 0.25s;
+}
+
+.navNumActive {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.social {
+  display: flex;
+  gap: 10px;
+}
+
+.social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.social a svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.social a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1);   }
+  50%       { opacity: 0.5; transform: scale(1.3); }
+}

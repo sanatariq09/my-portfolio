@@ -1,0 +1,164 @@
+.section {
+  background: var(--bg2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 3.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 20px 60px var(--glow);
+}
+
+.card:hover::after {
+  opacity: 0.06;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 8px 24px var(--glow);
+}
+
+.ic_orange { background: linear-gradient(135deg, #ff6b35, #ff9f1c); }
+.ic_green  { background: linear-gradient(135deg, #06d6a0, #028a57); }
+.ic_amber  { background: linear-gradient(135deg, #ff9f1c, #e67e00); }
+.ic_purple { background: linear-gradient(135deg, #a855f7, #6c21b5); }
+.ic_blue   { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.ic_pink   { background: linear-gradient(135deg, #ec4899, #9d1759); }
+
+.name {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+/* ── Proficiency bar ── */
+.barWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.barTrack {
+  flex: 1;
+  height: 5px;
+  background: var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 5px;
+  width: 0%;
+}
+
+.barPct {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ── CSS vars for gradient colors per category ── */
+:root {
+  --ic_orange_grad: linear-gradient(90deg, #ff6b35, #ff9f1c);
+  --ic_green_grad:  linear-gradient(90deg, #06d6a0, #028a57);
+  --ic_amber_grad:  linear-gradient(90deg, #ff9f1c, #e67e00);
+  --ic_purple_grad: linear-gradient(90deg, #a855f7, #6c21b5);
+  --ic_blue_grad:   linear-gradient(90deg, #3b82f6, #1d4ed8);
+  --ic_pink_grad:   linear-gradient(90deg, #ec4899, #9d1759);
+}
+
+/* ── Drag hint ── */
+.dragHint {
+  color: var(--accent);
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+/* ── Tags container ── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ── Draggable tag ── */
+.dragTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.tagIcon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.dragTag:hover {
+  transform: scale(1.08);
+  background: var(--surface2);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 4px 14px rgba(255,107,53,0.25);
+}
+
+.dragTag:active { cursor: grabbing; }
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,233 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* ambient orbs */
+.orb1,
+.orb2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.2;
+  pointer-events: none;
+}
+.orb1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #ff6b35, transparent);
+  top: -200px; left: -200px;
+}
+.orb2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #06d6a0, transparent);
+  bottom: -150px; right: -150px;
+}
+
+/* center content */
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  max-width: 560px;
+}
+
+/* ── glitch 404 ── */
+.code {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(100px, 20vw, 180px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -8px;
+  color: var(--text);
+  position: relative;
+  animation: glitch 3s infinite;
+}
+
+.code::before,
+.code::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+.code::before {
+  color: #ff6b35;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: glitchTop 2.5s infinite;
+  opacity: 0.7;
+}
+.code::after {
+  color: #06d6a0;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  animation: glitchBot 2.5s infinite;
+  opacity: 0.7;
+}
+
+/* ── CSS astronaut ── */
+.astro {
+  position: relative;
+  width: 80px;
+  height: 100px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.helmet {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e0e0e0, #a0a0a0);
+  margin: 0 auto;
+  position: relative;
+  box-shadow: inset -6px -6px 0 rgba(0,0,0,.15);
+}
+
+.visor {
+  width: 32px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #06d6a0);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -52%);
+  opacity: 0.9;
+}
+
+.reflection {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  position: absolute;
+  top: 14px; left: 14px;
+}
+
+.body {
+  width: 44px;
+  height: 36px;
+  background: linear-gradient(180deg, #d0d0d0, #a0a0a0);
+  border-radius: 8px;
+  margin: 4px auto 0;
+  position: relative;
+}
+
+.armL, .armR {
+  width: 12px;
+  height: 26px;
+  background: #c0c0c0;
+  border-radius: 6px;
+  position: absolute;
+  top: 4px;
+}
+.armL { left: -14px; transform: rotate(20deg); }
+.armR { right: -14px; transform: rotate(-20deg); }
+
+.legL, .legR {
+  width: 12px;
+  height: 22px;
+  background: #b0b0b0;
+  border-radius: 0 0 6px 6px;
+  position: absolute;
+  bottom: -20px;
+}
+.legL { left: 6px; }
+.legR { right: 6px; }
+
+/* ── orbiting stars ── */
+.stars {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: orbit 4s calc(var(--i) * 0.65s) linear infinite;
+  opacity: 0.7;
+}
+
+/* ── text ── */
+.heading {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -1px;
+}
+
+.sub {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 400px;
+}
+
+/* ── actions ── */
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+/* ── breadcrumb ── */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.5rem;
+}
+.sep     { color: var(--border2); }
+.missing { color: var(--accent); }
+
+/* ── keyframes ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%       { transform: translateY(-18px) rotate(3deg); }
+}
+
+@keyframes orbit {
+  0%   { transform: rotate(calc(var(--i) * 60deg)) translateX(48px) scale(1); }
+  50%  { opacity: 1; }
+  100% { transform: rotate(calc(var(--i) * 60deg + 360deg)) translateX(48px) scale(1); }
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { transform: skewX(0); }
+  91%            { transform: skewX(-2deg); }
+  93%            { transform: skewX(2deg);  }
+  95%            { transform: skewX(-1deg); }
+}
+
+@keyframes glitchTop {
+  0%, 88%, 100% { transform: translate(0); }
+  89%            { transform: translate(-4px, 2px); }
+  91%            { transform: translate(4px, -2px); }
+  93%            { transform: translate(-2px); }
+}
+
+@keyframes glitchBot {
+  0%, 85%, 100% { transform: translate(0); }
+  86%            { transform: translate(4px, 2px); }
+  89%            { transform: translate(-4px, -2px); }
+  92%            { transform: translate(2px); }
+}

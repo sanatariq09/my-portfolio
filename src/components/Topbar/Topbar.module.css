@@ -1,0 +1,323 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2.5rem;
+  height: 68px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+  overflow: visible;
+}
+
+.scrolled {
+  background: rgba(8, 9, 13, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: var(--border);
+}
+
+:global([data-theme='light']) .scrolled {
+  background: rgba(247, 245, 240, 0.88);
+}
+
+/* ── Logo ─────────────────────────────────────────────── */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Clash Display', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.logoText span {
+  color: var(--accent);
+}
+
+/*
+ * Same layering as Hero: conic ring → bg gap → photo + inset rim (Hero .photo default / hover border).
+ */
+.logoAvatar {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  vertical-align: middle;
+  aspect-ratio: 1;
+  isolation: isolate;
+}
+
+.logoAvatarRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  z-index: 0;
+  overflow: hidden;
+  background: conic-gradient(
+    var(--accent) 0deg,
+    var(--accent2) 90deg,
+    var(--accent3) 180deg,
+    transparent 270deg,
+    var(--accent) 360deg
+  );
+  animation: logoAvatarSpin 6s linear infinite;
+}
+
+.logoAvatarRing2 {
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  z-index: 1;
+  background: var(--bg);
+}
+
+.logoAvatarInner {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.logoImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 22%;
+  transform: scale(1.55) translateZ(0);
+  transform-origin: center 28%;
+  filter: brightness(0.95) saturate(1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@keyframes logoAvatarSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Centre nav ───────────────────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  transition: color 0.25s, background 0.25s;
+}
+
+.navLink:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.navLinkActive {
+  color: var(--text);
+}
+
+/* active underline dot */
+.navDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.navLinkActive .navDot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Ask AI (Gemini) ─────────────────────────────────── */
+.askAiBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 12px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(125deg, var(--accent) 0%, var(--accent3) 45%, var(--accent2) 100%)
+      border-box;
+  color: var(--text);
+  cursor: pointer;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition:
+    transform 0.3s var(--transition, ease),
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+  box-shadow:
+    0 0 0 1px rgba(255, 107, 53, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.askAiShine {
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.14) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.askAiBtn:hover .askAiShine {
+  transform: translateX(100%);
+}
+
+.askAiBtn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(255, 107, 53, 0.35),
+    0 8px 32px var(--glow),
+    0 12px 40px rgba(6, 214, 160, 0.12);
+  filter: brightness(1.03);
+}
+
+.askAiBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.askAiBtnActive {
+  box-shadow:
+    0 0 0 2px var(--accent3),
+    0 0 28px var(--glow),
+    0 8px 28px rgba(0, 0, 0, 0.35);
+  filter: brightness(1.05);
+}
+
+.askAiIcon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px var(--glow));
+}
+
+.askAiText {
+  white-space: nowrap;
+}
+
+.askAiAccent {
+  background: linear-gradient(125deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Right actions ────────────────────────────────────── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.themeBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.themeBtn:hover {
+  border-color: var(--accent);
+  transform: rotate(20deg);
+}
+
+.menuBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 50px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.menuBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px var(--glow);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .topbar { grid-template-columns: 1fr auto; }
+}
+
+@media (max-width: 640px) {
+  .topbar  { padding: 0 1.2rem; }
+  .menuText { display: none; }
+  .askAiText {
+    display: none;
+  }
+  .askAiBtn {
+    padding: 9px 11px;
+    gap: 0;
+  }
+}
