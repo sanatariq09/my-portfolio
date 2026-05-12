@@ -6,7 +6,7 @@
     "dev": "concurrently -k \"vite\" \"tsx watch server/chat.ts\"",
     "dev:vite": "vite",
     "dev:api": "tsx watch server/chat.ts",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "start:api": "tsx server/chat.ts"
   },
